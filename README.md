@@ -1,46 +1,110 @@
-# Getting Started with Create React App
+# RTK Query VS React Query
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## NPM Pakete installieren
 
-## Available Scripts
+### App erstellen:
 
-In the project directory, you can run:
+- CRA mit TS template:  
+  `npx create-react-app rtk-query-and-react-query --template typescript`
 
-### `npm start`
+### Pakete installieren
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### RTK Query
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- redux
+- react-redux
+- @reduxjs/toolkit
 
-### `npm test`
+#### React Query
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- axios (oder fetch)
+- react-query
 
-### `npm run build`
+`npm i react-query axios redux react-redux @reduxjs/toolkit`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Axios VS Fetch
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Fetch
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Vanilla JavaScript
+- Kann vom Browser direkt interpretiert werden (außer alter IE)
+- Daten müssen manuell transformiert werden
+- Etwas aufwendiger zu verwenden
 
-### `npm run eject`
+```jsx
+fetch('http://localhost:8080/user', { method: 'GET' })
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    return data;
+  });
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Axios
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Third-Party Library
+- Muss kompiliert werden
+- Daten werden automatisch transformiert
+- Einfacher zu verwenden
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```jsx
+axios.get('http://localhost:8080/user').then((response) => {
+  return response.data;
+});
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Überflüssige Dateien löschen
 
-## Learn More
+- App.test.tsx
+- logo.svg
+- setupTests.ts
+- reportWebVitals.ts
+- react-app-env.d.ts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### index.tsx
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- reportWebVitals löschen
+
+## JSON Server
+
+- Verzeichnis mit JSON File anlegen:  
+  /data/db.json
+
+```json
+{
+  "todos": [
+    { "id": 1, "text": "Einkaufen", "done": true },
+    { "id": 2, "text": "Programmieren", "done": false },
+    { "id": 3, "text": "Essen", "done": false },
+    { "id": 4, "text": "Schlafen", "done": true }
+  ]
+}
+```
+
+- Zweites Konsolenfenster öffnen und JSON Server mit npx ausführen  
+  `npx json-server --watch data/db.json --port 8000`
+
+- Im Browser: http://localhost:8000/todos
+
+## index.css anpassen
+
+- Styles hinzufügen
+
+```css
+.App > div {
+  max-width: 400px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+
+input,
+button,
+label {
+  cursor: pointer;
+}
+```
+
+## App starten
+
+`npm start`
